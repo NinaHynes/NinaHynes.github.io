@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My website</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: aqua;
+        }
+        .myclass {
+            border: 1px solid hsl(2, 83%, 47%);
+        }
+        #header {
+            background-color: aqua;
+            height: 100px;
+            width: 100%;
+        }
+        #main {
+            background-color: rgb(255, 105, 180); /* Neon Pink */
+            height: 270px;
+            width: 100%;
+        }
+        #footer-real {
+            background-color: aqua;
+            height: 500px;
+            width: 100%;
+        }
+        #footer-not-real, #footer-as-real {
+            display: none;
+            height: 500px;
+            width: 100%;
+        }
+        #donateButton {
+            background-color: aqua; /* Set 'aqua' color for the button */
+        }
+    </style>
+</head>
+<body>
+    <div class="myclass" id="header">
+        <h1>As Real As It Gets</h1>
+    </div>
+
+    <div class="myclass" id="main">
+        <form>
+            <label>Enter the meaning of life:</label>
+            <input type="text" required/>
+            <br><br>
+            <label>What is your favorite word:</label>
+            <input type="text" required/>
+            <br><br>
+            <label>Do Not Enter Password:</label>
+            <input type="password" required/>
+            <br><br>
+            <label>Critical thinking is important:</label>
+            <input type="checkbox" required/>
+            <br><br>
+            <label for="donationAmount">PUT YOUR MONEY WHERE YOUR MOUTH IS</label>
+            <button id="donateButton">LOVE ME</button>
+            <div id="thankYouMessage" style="display: none;">
+                <p><span id="donationMessage">WOW, thank you!</span></p>
+            </div>
+            <input type="number" id="donationAmount" placeholder="Enter amount" />
+        </form>
+    </div>
+
+    <div class="myclass" id="footer-real">
+        <p>This is real</p>
+        <img src="IMG_0006.jpg" alt="Description of the image" height="300px" width="300px">
+    </div>
+
+    <div class="myclass" id="footer-not-real">
+        <p>This is not real</p>
+        <img src="Nina_Photo2_head.jpg" alt="Description of the image" height="300px" width="300px">
+    </div>
+
+    <div class="myclass" id="footer-as-real">
+        <p>This is as real as it gets</p>
+        <img src="Rainbow.jpg.png" alt="Description of the image" height="300px" width="300px">
+    </div>
+
+    <script>
+        const donateButton = document.getElementById('donateButton');
+        const donationAmountInput = document.getElementById('donationAmount');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const donationMessage = document.getElementById('donationMessage');
+        const footerReal = document.getElementById('footer-real');
+        const footerNotReal = document.getElementById('footer-not-real');
+        const footerAsReal = document.getElementById('footer-as-real');
+        const originalBackgroundColor = document.body.style.backgroundColor;
+
+        let isOriginalPageVisible = true; // Track if the original page is visible
+
+        donateButton.addEventListener('click', function() {
+            const amount = parseFloat(donationAmountInput.value);
+
+            if (isOriginalPageVisible) {
+                // Hide the original page
+                document.getElementById('header').style.display = 'none';
+                document.getElementById('main').style.display = 'none';
+                document.getElementById('footer-real').style.display = 'none';
+                isOriginalPageVisible = false; // Mark the original page as hidden
+
+                if (amount <= 0) {
+                    // Display the 'not real' content
+                    document.body.style.backgroundColor = 'red';
+                    footerNotReal.style.display = 'block';
+                    const result = confirm("Error, where is your heart? Click OK to continue.");
+                    if (!result) {
+                        // User didn't click OK, show the thank you message
+                        thankYouMessage.style.display = 'block';
+                    }
+                } else {
+                    // Display the 'as real as it gets' content
+                    document.body.style.backgroundColor = 'rgb(173, 255, 47)'; // Neon Green
+                    footerAsReal.style.display = 'block';
+                    const result = confirm("Magic, clearly a winner. Click OK to continue.");
+                    if (!result) {
+                        // User didn't click OK, show the thank you message
+                        thankYouMessage.style.display = 'block';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
